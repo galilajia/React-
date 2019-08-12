@@ -33,7 +33,7 @@ const Item = Form.Item
             <Item>
 
               {
-                getFieldDecorator('username', { 
+                getFieldDecorator('username', { rules: [{min: 4, message: '至少输入4个字符'}]
                 })(
                   <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -45,7 +45,7 @@ const Item = Form.Item
             </Item>
             <Form.Item>
               {
-                getFieldDecorator('password', {
+                getFieldDecorator('password', {rules: [{min: 6, message: '密码最少6位'}]
 
                 })(
                   <Input
