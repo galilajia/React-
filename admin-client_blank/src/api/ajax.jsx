@@ -6,7 +6,7 @@ axios.interceptors.request.use(config => {
     console.log(config)
     const { method, data } = config
     //判断是否携带POST请求
-    if (method.toUpperCase()=== 'POST' && data instanceof Object) {
+    if (method.toUpperCase() === 'POST' && data instanceof Object) {
         config.data = qs.stringify(data)
     }
     return config
