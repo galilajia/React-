@@ -74,7 +74,7 @@ class Login extends Component {
   
   render() {
     if (memoryUtils.user._id) {
-       return <Redirect to = '/admin'/>
+       return <Redirect to = '/'/>
     }
     //获取getFieldDecorator属性用于和表单进行双向绑定
     const { getFieldDecorator } = this.props.form
