@@ -17,9 +17,12 @@ export const reqAddUser = (user) => ajax({
   method: 'POST',
   data: user
 })
+/* 
+获取天气信息
+*/
 export const reqWeather= (city)=>{
   //接收地址
-  const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
+  const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2&datanow`
   return new Promise((response,reject)=>{
     //读文档使用jsonp模块
     jsonp(url, {}, (err,data)=>{
@@ -33,5 +36,25 @@ export const reqWeather= (city)=>{
       }
     })
   })
-
 }
+/* 
+获取所有商品分类的列表
+*/
+export const reqCategorys = () => ajax.get ('/manage/category/list')
+/*
+添加商品信息
+*/
+export const reqAddCategory = (categoryName)=> ajax.post('manage/category/add',{categoryName})
+/* 
+更新商品列表
+*/
+export const reqUpdateCategory = (categoryId,categoryName)=> ajax.post('manage/category/update',{categoryId,categoryName})
+/*
+获取商品分页列表
+*/
+export const reqProducts = (pageNum, pageSize) => ajax.get('/manage/product/list', {
+  params: { // 值是对象, 对象中包含的是query参数数据
+    pageNum,
+    pageSize
+  }
+})
