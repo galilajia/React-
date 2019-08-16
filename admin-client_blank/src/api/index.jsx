@@ -20,18 +20,18 @@ export const reqAddUser = (user) => ajax({
 /* 
 获取天气信息
 */
-export const reqWeather= (city)=>{
+export const reqWeather = (city) => {
   //接收地址
   const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2&datanow`
-  return new Promise((response,reject)=>{
+  return new Promise((response, reject) => {
     //读文档使用jsonp模块
-    jsonp(url, {}, (err,data)=>{
-      if(!err && data.error === 0){
+    jsonp(url, {}, (err, data) => {
+      if (!err && data.error === 0) {
         //根据接送文件获取想要的值
-        const {dayPictureUrl,weather} = data.results[0].weather_data[0]
+        const { dayPictureUrl, weather } = data.results[0].weather_data[0]
         //将接受的值以成功的方式传送出去
-        response({dayPictureUrl,weather})
-      }else{
+        response({ dayPictureUrl, weather })
+      } else {
         message.error('天气数据引入失败')
       }
     })
@@ -40,15 +40,15 @@ export const reqWeather= (city)=>{
 /* 
 获取所有商品分类的列表
 */
-export const reqCategorys = () => ajax.get ('/manage/category/list')
+export const reqCategorys = () => ajax.get('/manage/category/list')
 /*
 添加商品信息
 */
-export const reqAddCategory = (categoryName)=> ajax.post('manage/category/add',{categoryName})
+export const reqAddCategory = (categoryName) => ajax.post('manage/category/add', { categoryName })
 /* 
 更新商品列表
 */
-export const reqUpdateCategory = (categoryId,categoryName)=> ajax.post('manage/category/update',{categoryId,categoryName})
+export const reqUpdateCategory = (categoryId, categoryName) => ajax.post('manage/category/update', { categoryId, categoryName })
 /*
 获取商品分页列表
 */
@@ -56,5 +56,27 @@ export const reqProducts = (pageNum, pageSize) => ajax.get('/manage/product/list
   params: { // 值是对象, 对象中包含的是query参数数据
     pageNum,
     pageSize
+  }
+})
+/* 
+searchType :搜索类型 
+*/
+export const reqSearchProducts = ({ pageNum, pageSize, searchName, searchType }) => ajax('/manage/product/search', {
+  params: {
+    pageNum,
+    pageSize,
+    [searchType]: searchName
+  }
+})
+/*
+获取商品更新信息 POST请求参数 用data接受 直接写{参数}, GET 请求用parms 接收参数
+*/
+export const reqUpdateProductsStatus = (productId, status) => ajax.post('/manage/product/updateStatus', {
+  productId,
+  status
+})
+export const reqProduct = (productId) => ajax.get('/manage/product/info', {
+  params: {
+    productId
   }
 })
