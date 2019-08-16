@@ -60,12 +60,16 @@ export default class ProductHome extends Component {
         render: product => (
           <span>
             <LinkButton
-            onClick={() => {
-               memoryUtils.product = product // 将product保存到内存
-              this.props.history.push(`/product/detail/${product._id}`, product)
-            }}
+              onClick={() => {
+                memoryUtils.product = product // 将product保存到内存
+                this.props.history.push(`/product/detail/${product._id}`, product)
+              }}
             >详情</LinkButton>
-            <LinkButton>修改</LinkButton>
+            <LinkButton
+            onClick={() => {
+              this.props.history.push(`/product/addupdate`, product)
+            }}
+            >修改</LinkButton>
           </span>
         )
       }
@@ -88,7 +92,6 @@ export default class ProductHome extends Component {
     } else {//一般分页
       result = await reqProducts(pageNum, PAGE_SIZE)
     }
-
     if (result.status === 0) {
       const { total, list } = result.data
       this.setState({
@@ -122,7 +125,7 @@ export default class ProductHome extends Component {
       </span>
     )
     const extra = (
-      <Button type='primary'>
+      <Button type='primary' onClick={() => this.props.history.push('/product/addupdate')}>
         <Icon type="plus"></Icon>
         添加商品
       </Button>

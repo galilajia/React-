@@ -58,6 +58,11 @@ export const reqProducts = (pageNum, pageSize) => ajax.get('/manage/product/list
     pageSize
   }
 })
+export const reqCategory = (categoryId) => ajax('/manage/category/info', {
+  params: {
+    categoryId
+  }
+})
 /* 
 searchType :搜索类型 
 */
@@ -80,3 +85,4 @@ export const reqProduct = (productId) => ajax.get('/manage/product/info', {
     productId
   }
 })
+export const reqDeleteImg = (name) => ajax.post('/manage/img/delete', {name})

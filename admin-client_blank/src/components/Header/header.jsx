@@ -56,7 +56,7 @@ class Header extends Component {
                 // 如果有二级菜单
             } else if (item.children) {
                 //因为最多有二级菜单所以可以用find
-                const cItem = item.children.find(cItem => cItem.key === path)
+                const cItem = item.children.find(cItem => path.indexOf( cItem.key) === 0 )
                 if (cItem) {
                     title = cItem.title
                 }

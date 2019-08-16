@@ -26,7 +26,7 @@ class LeftNav extends Component {
             } else {
                 // 当前item的children中某个item的key与当前请求的path相同, 当前item的key就是openKey
                 //查询第一个打开的曹丹或者是子菜单
-                const cItem = item.children.find(cItem => cItem.key === path)
+                const cItem = item.children.find(cItem =>  path.indexOf(cItem.key) === 0)
                 console.log(cItem)
                 if (cItem) {
                     // 保存openKey
@@ -58,7 +58,10 @@ class LeftNav extends Component {
     }
     render() {
         //重新获取路径
-        const path = this.props.location.pathname
+        let path = this.props.location.pathname 
+        if(path.indexOf('/product')===0){
+            path = '/product'
+        }
         console.log('path', path, this.openKey)
         return (
             <div className='left-nav'>
